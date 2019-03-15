@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相册浏览页</title>
+</head>
+<body>
+<center>
+    {%include 'myapp/menu.html'%}
+
+    <table width="800" border="1">
+        <tr align="center">
+            <td>id号</td>
+            <td>标题</td>
+            <td>图片</td>
+            <td>时间</td>
+            <td>操作</td>
+        </tr>
+        {% for list in userlist %}
+        <tr>
+            <th>{{list.id}}</th>
+            <th>{{list.title}}</th>
+            <th>
+                <img src="/static/myapp/pics/s_{{list.photo}}" >
+            </th>
+            <th>{{list.createtime|date:'Y-m-d H:i:s'}}</th>
+            <th>
+                <a href="{% url 'edituser' list.id %}">编辑</a>
+                <a href="{% url 'deluser' list.id %}"><span style="color: red">删除</span></a>
+
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% for i in plist %}
+                {% if i == pIndex %}
+                    <b style="color:red">{{i}}</b>
+                {% else %}
+                    <a href="{% url 'user' i %}">{{i}}</a>
+                {% endif %}
+    {% endfor %}
+
+
+
+
+</center>
+
+</body>
+</html>
